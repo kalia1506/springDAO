@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context-4.3.xsd">
+
+	<!--DataSource configuration -->
+	<!-- <bean id="HKDS" class="com.zaxxer.hikari.HikariDataSource"> <property 
+		name="driverClassName" value="com.mysql.cj.jdbc.Driver" /> <property name="jdbcUrl" 
+		value="jdbc:mysql://localhost:3306/spring712" /> <property name="username" 
+		value="root" /> <property name="password" value="root" /> <property name="maximumPoolSize" 
+		value="20" /> </bean> -->
+	<bean id="HKDS" class="com.zaxxer.hikari.HikariDataSource">
+		<property name="driverClassName"
+			value="oracle.jdbc.driver.OracleDriver" />
+		<property name="jdbcUrl"
+			value="jdbc:oracle:thin:@localhost:1521:xe" />
+		<property name="username" value="system" />
+		<property name="password" value="kalia" />
+		<property name="maximumPoolSize" value="20" />
+	</bean>
+	<bean id="SimpleJdbcInsert"
+		class="org.springframework.jdbc.core.simple.SimpleJdbcCall">
+		<constructor-arg ref="HKDS" />
+	</bean>
+
+
+	<!--PlayerInfo DAO class configuration -->
+	<context:component-scan
+		base-package="kcp.spring.dao" />
+
+</beans>
